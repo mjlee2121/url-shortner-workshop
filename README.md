@@ -35,15 +35,15 @@ Find your work with: `grep -rn "TODO(M3)" app/`
 ## Milestone 0: Requirements (fill this in before writing code)
 
 **Functional requirements**
-# Read should be very fast compared to Write. Read happens 10 times more than write, so the redirect is what needs to be optimized. The link should be 
+Read should be very fast compared to Write. Read happens 10 times more than write, so the redirect is what needs to be optimized. The link should be 
 - 
 
 **Non-functional requirements**
-# Must have: No duplicated links. Correctedness. When the link is expired, it should be removed or stop working.
-# Nice to have: click statistics and be delayed 1-2 seconds. The custom code that a user wants is just a nice-to-have
+Must have: No duplicated links. Correctedness. When the link is expired, it should be removed or stop working.
+Nice to have: click statistics and be delayed 1-2 seconds. The custom code that a user wants is just a nice-to-have
 - 
 
 **Back-of-envelope:** if 1 million links are created per month and each is clicked 100 times on average,
 how many redirects per second is that on average? What does that ratio tell you about where to optimize?
-# that's 1mil * 100 = 100 mil clicks per month. 1 months has 2,600,000 seconds. So 100 mil / 2,600,000 = 40 click/sec. Whereas creating a link happens 4 times / sec. Write should be buffered and read should be cached.
+that's 1mil * 100 = 100 mil clicks per month. 1 months has 2,600,000 seconds. So 100 mil / 2,600,000 = 40 click/sec. Whereas creating a link happens 4 times / sec. Write should be buffered and read should be cached.
 - 
