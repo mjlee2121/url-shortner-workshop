@@ -1,0 +1,18 @@
+# TODO(M6): run the full test suite on every push and pull request.
+#
+# name: CI
+# on: push to main, and pull_request
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+#     services:            # real Postgres 16 and Redis 7 as service containers, with health checks
+#       postgres: image postgres:16-alpine, env POSTGRES_USER/PASSWORD/DB (urldb_test), ports 5432:5432
+#       redis:    image redis:7-alpine, ports 6379:6379
+#     env: DATABASE_URL=postgresql://user:pass@localhost:5432/urldb_test, REDIS_URL=redis://localhost:6379/15
+#     steps:
+#       - actions/checkout@v4
+#       - actions/setup-python@v5 with python-version "3.12" and cache: pip
+#       - pip install -r requirements-dev.txt
+#       - pytest
+#   docker-build:          # a second job: prove the Dockerfile builds
+#     steps: checkout, then `docker build -t url-shortener .`

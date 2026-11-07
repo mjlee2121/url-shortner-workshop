@@ -1,0 +1,21 @@
+-- Milestone 3: the urls table. PostgreSQL is the source of truth; Redis will only hold copies.
+--
+-- TODO(M3): write CREATE TABLE urls with these columns:
+--
+--   id            BIGSERIAL, primary key
+--                   (its sequence feeds codes.code_for_id)
+--   code          VARCHAR(30), NOT NULL, UNIQUE
+--                   Why UNIQUE here, when the Python code already checks? Two reasons:
+--                   the B-tree index it creates, and race conditions between requests.
+--   original_url  TEXT, NOT NULL, with CHECK (char_length(original_url) <= 2048)
+--                   (Pydantic checks this too. Why check it in the database as well?)
+--   is_custom     BOOLEAN, NOT NULL, DEFAULT FALSE
+--   clicks        BIGINT, NOT NULL, DEFAULT 0
+--   created_at    TIMESTAMPTZ, NOT NULL, DEFAULT now()
+--                   (TIMESTAMPTZ, not TIMESTAMP: why does the time zone matter?)
+--   expires_at    TIMESTAMPTZ, nullable (NULL = never expires)
+--
+-- Optional: a partial index for a future cleanup job:
+--   CREATE INDEX urls_expires_at_idx ON urls (expires_at) WHERE expires_at IS NOT NULL;
+--
+-- Remember: once this file has run anywhere, never edit it. Schema changes go in 002_..., 003_...
